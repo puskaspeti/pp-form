@@ -1,4 +1,4 @@
-<div>
-  <label>{{ options?.label || '' }}</label>
-</div>
-<input type="text" [formControl]="control" [placeholder]="options?.placeholder || ''">
+<label>
+  {{ options?.label || '' }}
+  <input type="text" [formControl]="control" [placeholder]="options?.placeholder || ''">
+</label>
