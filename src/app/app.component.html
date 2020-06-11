@@ -1,9 +1,12 @@
 <h1>Custom NgControl, ValueAccessor and FormControl demo</h1>
 
 <section>
-  <h2>FormControl example</h2>
+  <h2>Reactive form examples</h2>
   <form [formGroup]="form">
-    <app-text-form-control [formControl]="form.get('control1')" #control1="ngForm"></app-text-form-control>{{ control1.value }}
+    <app-text-form-control [formControl]="form.get('control1')" #control1="ngForm"></app-text-form-control>
+    <app-text-form-control formControlName="control2"></app-text-form-control>
+    <div>Form valid: {{ form.valid }}</div>
+    <div>{{ form.value | json }}</div>
   </form>
 </section>
 
