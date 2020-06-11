@@ -19,7 +19,7 @@ export const formControlBinding: any = {
 
 @Directive({
   // tslint:disable-next-line: directive-selector
-  selector: '[ngModel2]',
+  selector: '[ngModel]',
   providers: [formControlBinding],
   exportAs: 'ngModel'
 })
@@ -27,7 +27,7 @@ export class NgModel2Directive<TValue = unknown, TOptions extends FormControl2Op
 
   public readonly control = new FormControl2<TValue>();
 
-  @Input('ngModel2') model: TValue;
+  @Input('ngModel') model: TValue;
 
   // tslint:disable-next-line: no-input-rename
   @Input('options') set controlOptions(val: TOptions) {

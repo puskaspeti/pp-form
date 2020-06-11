@@ -14,7 +14,7 @@ export const ngValueAccessor: any = {
   selector: 'app-text-form-control',
   templateUrl: './text-form-control.component.html',
   styleUrls: ['./text-form-control.component.scss'],
-  providers: [ngValueAccessor]
+  providers: [ngValueAccessor],
 })
 export class TextFormControlComponent extends ControlValueAccessor2<string, TextFormControlOptions, TextFormControl> {
 

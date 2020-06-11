@@ -1,13 +1,14 @@
-<h1>Custom NgControl, ValueAccessor és FormControl demo</h1>
+<h1>Custom NgControl, ValueAccessor and FormControl demo</h1>
 
 <section>
   <h2>FormControl example</h2>
-  <app-text-form-control [formControl2]="control"></app-text-form-control>
-  {{ control.value }}
+  <form [formGroup]="form">
+    <app-text-form-control [formControl]="form.get('control1')" #control1="ngForm"></app-text-form-control>{{ control1.value }}
+  </form>
 </section>
 
 <section>
   <h2>NgModel example</h2>
-  <app-text-form-control [(ngModel2)]="model" [options]="modelOptions"></app-text-form-control>
+  <app-text-form-control [(ngModel)]="model" [options]="modelOptions"></app-text-form-control>
   {{ model }}
 </section>

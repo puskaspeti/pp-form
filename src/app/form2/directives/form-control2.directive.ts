@@ -13,13 +13,13 @@ export const formControlBinding: any = {
 
 @Directive({
   // tslint:disable-next-line: directive-selector
-  selector: '[formControl2]',
+  selector: '[formControl]',
   providers: [formControlBinding],
   exportAs: 'ngForm'
 })
 export class FormControl2Directive<TControl extends FormControl = FormControl> extends FormControlDirective {
 
-  @Input('formControl2') set formControl(val: TControl) {
+  @Input('formControl') set formControl(val: TControl) {
     this.form = val;
   }
 

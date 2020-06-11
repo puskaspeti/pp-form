@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { TextFormControl } from './example/text-form-control/text-form-control';
 import { TextFormControlOptions } from './example/text-form-control/text-form-control-options';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -8,7 +9,9 @@ import { TextFormControlOptions } from './example/text-form-control/text-form-co
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  control = new TextFormControl(null, null, { label: 'Label', placeholder: 'Placeholder' });
+  form = new FormGroup({
+    control1: new TextFormControl(null, null, { label: 'Label', placeholder: 'Placeholder' })
+  });
 
   model = 'some value';
   modelOptions: TextFormControlOptions = {
