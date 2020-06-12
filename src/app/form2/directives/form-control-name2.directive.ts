@@ -2,7 +2,7 @@ import { Directive, forwardRef, Optional, Host, SkipSelf, Self, Inject, Input } 
 import { NgControl, ControlContainer, NG_VALIDATORS, Validator, ValidatorFn,
   NG_ASYNC_VALIDATORS, AsyncValidator, AsyncValidatorFn,
   NG_VALUE_ACCESSOR, ControlValueAccessor, FormControlName } from '@angular/forms';
-import { ControlValueAccessor2 } from '../models/control-value-accessor2';
+import {setNgControlToControlValueAccessor} from './shared';
 
 export const controlNameBinding: any = {
   provide: NgControl,
@@ -11,7 +11,8 @@ export const controlNameBinding: any = {
 
 @Directive({
   // tslint:disable-next-line: directive-selector
-  selector: '[formControlName]'
+  selector: '[formControlName]',
+  providers: [controlNameBinding],
 })
 export class FormControlName2Directive extends FormControlName {
 
@@ -25,12 +26,6 @@ export class FormControlName2Directive extends FormControlName {
     @Optional() @Self() @Inject(NG_ASYNC_VALIDATORS) asyncValidators: Array<AsyncValidator|AsyncValidatorFn>,
     @Optional() @Self() @Inject(NG_VALUE_ACCESSOR) valueAccessors: ControlValueAccessor[]) {
       super(parent, validators, asyncValidators, valueAccessors, null);
-      this.setNgControlToControlValueAccessor();
-    }
-
-    setNgControlToControlValueAccessor() {
-      if (this.valueAccessor instanceof ControlValueAccessor2) {
-        this.valueAccessor.ngControl = this;
-      }
-    }
+      setNgControlToControlValueAccessor(this, this.valueAccessor);
+  }
 }

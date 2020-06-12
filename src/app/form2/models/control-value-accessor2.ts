@@ -4,16 +4,16 @@ import { FormControl2Options } from './form-control2-options';
 import { NgControl2 } from './ng-control2';
 
 export class ControlValueAccessor2<
-  TValue,
-  TOptions extends FormControl2Options,
-  TControl extends FormControl2<TValue, TOptions>,
+  TValue = unknown,
+  TOptions extends FormControl2Options = FormControl2Options,
+  TControl extends FormControl2<TValue, TOptions> = FormControl2<TValue, TOptions>,
 > implements ControlValueAccessor {
 
   ngControl: NgControl2;
   disabled = false;
 
   get control(): AbstractControl | TControl | null {
-    return this.ngControl?.control;
+    return this.ngControl.control;
   }
 
   get options(): TOptions | null {

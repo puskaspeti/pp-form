@@ -2,9 +2,9 @@ import { Directive, forwardRef, Inject, Input, Optional, Self } from '@angular/c
 import {
   AsyncValidator, AsyncValidatorFn, ControlValueAccessor, FormControl, FormControlDirective,
   NgControl, NG_ASYNC_VALIDATORS, NG_VALIDATORS,
-  NG_VALUE_ACCESSOR, Validator, ValidatorFn
+  NG_VALUE_ACCESSOR, Validator, ValidatorFn,
 } from '@angular/forms';
-import { ControlValueAccessor2 } from '../models/control-value-accessor2';
+import {setNgControlToControlValueAccessor} from './shared';
 
 export const formControlBinding: any = {
   provide: NgControl,
@@ -19,8 +19,8 @@ export const formControlBinding: any = {
 })
 export class FormControl2Directive<TControl extends FormControl = FormControl> extends FormControlDirective {
 
-  @Input('formControl') set formControl(val: TControl) {
-    this.form = val;
+  @Input('formControl') set form(val: FormControl) {
+    super.form = val;
   }
 
   constructor(
@@ -28,12 +28,6 @@ export class FormControl2Directive<TControl extends FormControl = FormControl> e
     @Optional() @Self() @Inject(NG_ASYNC_VALIDATORS) asyncValidators: Array<AsyncValidator|AsyncValidatorFn>,
     @Optional() @Self() @Inject(NG_VALUE_ACCESSOR) valueAccessors: ControlValueAccessor[]) {
       super(validators, asyncValidators, valueAccessors, null);
-      this.setNgControlToControlValueAccessor();
-  }
-
-  setNgControlToControlValueAccessor() {
-    if (this.valueAccessor instanceof ControlValueAccessor2) {
-      this.valueAccessor.ngControl = this;
-    }
+      setNgControlToControlValueAccessor(this, this.valueAccessor);
   }
 }
