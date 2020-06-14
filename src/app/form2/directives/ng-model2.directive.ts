@@ -8,7 +8,9 @@ import {
   OnDestroy,
   Optional,
   Output,
-  Self
+  Self,
+  OnChanges,
+  SimpleChanges
 } from '@angular/core';
 import {
   AsyncValidator, AsyncValidatorFn,
@@ -33,19 +35,19 @@ export const formControlBinding: any = {
   providers: [formControlBinding],
   exportAs: 'ngModel'
 })
-export class NgModel2Directive<TValue = unknown, TOptions extends FormControl2Options = FormControl2Options> extends NgModel implements OnDestroy {
+export class NgModel2Directive<
+  TValue = unknown,
+  TOptions extends FormControl2Options = FormControl2Options
+> extends NgModel implements OnDestroy, OnChanges {
 
-  public readonly control = new FormControl2<TValue>();
+  public readonly control = new FormControl2<TValue, TOptions>();
 
   @Input('ngModel') model: TValue;
 
   // tslint:disable-next-line: no-input-rename
   @Input('options') set controlOptions(val: TOptions) {
-    this.control['options'] = val;
+    this.control.options = val;
   }
-
-  // tslint:disable-next-line: no-output-rename
-  @Output('ngModel2Change') update = new EventEmitter<TValue>();
 
   private subscription: Subscription;
 
@@ -59,14 +61,18 @@ export class NgModel2Directive<TValue = unknown, TOptions extends FormControl2Op
       setNgControlToControlValueAccessor(this, this.valueAccessor);
   }
 
+  ngOnChanges(changes: SimpleChanges) {
+    super.ngOnChanges(changes);
+  }
+
   ngOnDestroy() {
     super.ngOnDestroy();
     this.subscription.unsubscribe();
   }
 
   setViewModelUpdateOnChange() {
-    this.subscription = this.control.valueChanges.subscribe((val: TValue) => {
-      this.viewToModelUpdate(val);
+    this.subscription = this.control.valueChanges.subscribe((newValue: TValue) => {
+      this.viewToModelUpdate(newValue);
     });
   }
 }

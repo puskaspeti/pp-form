@@ -20,4 +20,4 @@ export const CUSTOM_TEMPLATE_DRIVEN_DIRECTIVES: Type<any>[] = [NgModel2Directive
 
 export const REACTIVE_DRIVEN_DIRECTIVES: Type<any>[] = [FormGroupDirective, FormGroupName, FormArrayName];
 
-export const CUSTOM_REACTIVE_DRIVEN_DIRECTIVES: Type<any>[] = [FormControl2Directive ,FormControlName2Directive]
+export const CUSTOM_REACTIVE_DRIVEN_DIRECTIVES: Type<any>[] = [FormControl2Directive, FormControlName2Directive];
