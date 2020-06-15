@@ -42,8 +42,6 @@ export class NgModel2Directive<
 
   public readonly control = new FormControl2<TValue, TOptions>();
 
-  @Input('ngModel') model: TValue;
-
   // tslint:disable-next-line: no-input-rename
   @Input('options') set controlOptions(val: TOptions) {
     this.control.options = val;
