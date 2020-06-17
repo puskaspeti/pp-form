@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import { TextFormControl } from './example/text-form-control/text-form-control';
 import { TextFormControlOptions } from './example/text-form-control/text-form-control-options';
 import { FormGroup, Validators } from '@angular/forms';
+import {NgModel2Options} from './form2/models/ng-model2-options';
 
 @Component({
   selector: 'app-root',
@@ -15,7 +16,8 @@ export class AppComponent {
   });
 
   model = 'some value';
-  modelOptions: TextFormControlOptions = {
+  modelOptions: TextFormControlOptions & NgModel2Options = {
+    controlType: TextFormControl,
     label: 'Label 2',
     placeholder: 'Placeholder 2'
   };

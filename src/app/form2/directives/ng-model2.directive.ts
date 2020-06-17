@@ -1,28 +1,33 @@
 import {
   Directive,
-  EventEmitter,
   forwardRef,
   Host,
   Inject,
   Input,
+  OnChanges,
   OnDestroy,
   Optional,
-  Output,
   Self,
-  OnChanges,
-  SimpleChanges
+  SimpleChanges,
 } from '@angular/core';
 import {
-  AsyncValidator, AsyncValidatorFn,
-  ControlContainer, ControlValueAccessor,
+  AsyncValidator,
+  AsyncValidatorFn,
+  ControlContainer,
+  ControlValueAccessor,
+  NG_ASYNC_VALIDATORS,
+  NG_VALIDATORS,
+  NG_VALUE_ACCESSOR,
   NgControl,
-  NgModel, NG_ASYNC_VALIDATORS, NG_VALIDATORS,
-  NG_VALUE_ACCESSOR, Validator, ValidatorFn
+  NgModel,
+  Validator,
+  ValidatorFn
 } from '@angular/forms';
-import { FormControl2 } from '../models/form-control2';
-import { FormControl2Options } from '../models/form-control2-options';
+import {FormControl2} from '../models/form-control2';
+import {FormControl2Options} from '../models/form-control2-options';
 import {setNgControlToControlValueAccessor} from './shared';
 import {Subscription} from 'rxjs';
+import {NgModel2Options} from '../models/ng-model2-options';
 
 export const formControlBinding: any = {
   provide: NgControl,
@@ -40,10 +45,11 @@ export class NgModel2Directive<
   TOptions extends FormControl2Options = FormControl2Options
 > extends NgModel implements OnDestroy, OnChanges {
 
-  public readonly control = new FormControl2<TValue, TOptions>();
+  control = new FormControl2<TValue, TOptions>();
 
   // tslint:disable-next-line: no-input-rename
-  @Input('options') set controlOptions(val: TOptions) {
+  @Input('options') set controlOptions(val: TOptions & NgModel2Options) {
+    this.setControlType(val);
     this.control.options = val;
   }
 
@@ -72,5 +78,23 @@ export class NgModel2Directive<
     this.subscription = this.control.valueChanges.subscribe((newValue: TValue) => {
       this.viewToModelUpdate(newValue);
     });
+  }
+
+  setControlType(option: TOptions & NgModel2Options) {
+    if (!option?.controlType) {
+      return;
+    }
+
+    if (this.isSamePrototype(Object.getPrototypeOf(this.control), option.controlType.prototype)) {
+      return;
+    }
+
+    if ((new option.controlType) instanceof FormControl2) {
+      Object.setPrototypeOf(this.control, option.controlType.prototype);
+    }
+  }
+
+  isSamePrototype(type1: object, type2: object): boolean {
+    return type1 != null && type2 != null && type1 === type2;
   }
 }

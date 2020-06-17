@@ -13,7 +13,7 @@ export class ControlValueAccessor2<
   disabled = false;
 
   get control(): AbstractControl | TControl | null {
-    return this.ngControl.control;
+    return this.ngControl?.control;
   }
 
   get options(): TOptions | null {
