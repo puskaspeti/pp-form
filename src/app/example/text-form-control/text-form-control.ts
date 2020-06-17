@@ -10,4 +10,9 @@ export class TextFormControl extends FormControl2<string> {
   ) {
     super(formState, validatorOrOpts, options);
   }
+
+  setValue(value: any, options?: { onlySelf?: boolean; emitEvent?: boolean; emitModelToViewChange?: boolean; emitViewToModelChange?: boolean }) {
+    console.log('foo');
+    super.setValue(value, options);
+  }
 }
