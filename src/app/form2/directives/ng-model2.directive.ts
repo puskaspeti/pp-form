@@ -85,16 +85,12 @@ export class NgModel2Directive<
       return;
     }
 
-    if (this.isSamePrototype(Object.getPrototypeOf(this.control), option.controlType.prototype)) {
+    if (option.controlType.prototype.isPrototypeOf(this.control)) {
       return;
     }
 
     if ((new option.controlType) instanceof FormControl2) {
       Object.setPrototypeOf(this.control, option.controlType.prototype);
     }
-  }
-
-  isSamePrototype(type1: object, type2: object): boolean {
-    return type1 != null && type2 != null && type1 === type2;
   }
 }

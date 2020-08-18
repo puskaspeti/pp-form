@@ -17,9 +17,7 @@ export const ngValueAccessor: any = {
   providers: [ngValueAccessor],
 })
 export class TextFormControlComponent extends ControlValueAccessor2<string, TextFormControlOptions, TextFormControl> {
-
   constructor() {
     super();
   }
-
 }

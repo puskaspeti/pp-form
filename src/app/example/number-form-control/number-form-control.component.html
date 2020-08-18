@@ -1,0 +1,6 @@
+<div>
+  <label>
+    {{ options?.label || '' }}
+    <input type="number" [step]="options.step" [formControl]="control" [placeholder]="options?.placeholder || ''">
+  </label>
+</div>
