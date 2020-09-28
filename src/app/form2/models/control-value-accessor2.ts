@@ -2,26 +2,38 @@ import { AbstractControl, ControlValueAccessor } from '@angular/forms';
 import { FormControl2 } from './form-control2';
 import { FormControl2Options } from './form-control2-options';
 import { NgControl2 } from './ng-control2';
+import {Directive, Input} from '@angular/core';
 
-export class ControlValueAccessor2<
+@Directive()
+export abstract class ControlValueAccessor2<
   TValue = unknown,
   TOptions extends FormControl2Options = FormControl2Options,
   TControl extends FormControl2<TValue, TOptions> = FormControl2<TValue, TOptions>,
 > implements ControlValueAccessor {
 
-  ngControl: NgControl2;
-  disabled = false;
-
   get control(): AbstractControl | TControl | null {
     return this.ngControl?.control;
   }
 
-  get options(): TOptions | null {
+  @Input() set options(val: TOptions) {
+    if (this.control instanceof FormControl2) {
+      this.control.options = val;
+    }
+    this._options = val;
+  }
+
+  get options(): TOptions {
     if (this.control instanceof FormControl2) {
       return this.control.options;
     }
-    return null;
+    return this._options;
   }
+
+  ngControl: NgControl2;
+  disabled = false;
+
+  // tslint:disable-next-line:variable-name
+  protected _options: TOptions;
 
   onChange = (value: TValue) => {};
   onTouched = () => {};
@@ -38,11 +50,5 @@ export class ControlValueAccessor2<
     this.disabled = isDisabled;
   }
 
-  writeValue(value: TValue): void {
-    if (this.disabled) {
-      return;
-    }
-
-    this.onChange(value);
-  }
+  writeValue(value: TValue): void {}
 }

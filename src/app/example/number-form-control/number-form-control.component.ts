@@ -8,8 +8,4 @@ import {NumberFormControl} from './number-form-control';
   templateUrl: './number-form-control.component.html',
   styleUrls: ['./number-form-control.component.scss']
 })
-export class NumberFormControlComponent extends ControlValueAccessor2<number, NumberFormControlOptions, NumberFormControl> {
-  constructor() {
-    super();
-  }
-}
+export class NumberFormControlComponent extends ControlValueAccessor2<number, NumberFormControlOptions, NumberFormControl> {}

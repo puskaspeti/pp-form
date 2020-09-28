@@ -50,7 +50,6 @@ export class NgModel2Directive<
   // tslint:disable-next-line: no-input-rename
   @Input('options') set controlOptions(val: TOptions & NgModel2Options) {
     this.setControlType(val);
-    this.control.options = val;
   }
 
   private subscription: Subscription;

@@ -6,11 +6,12 @@ import {NgModel2Options} from './form2/models/ng-model2-options';
 import {FormGroup2} from './form2/models/form-group2';
 import {NumberFormControl} from './example/number-form-control/number-form-control';
 import {FormArray2} from './form2/models/form-array2';
+import {ConventionalTextFormControl} from './example/conventional-text-form-control/conventional-text-form-control';
 
 interface Demo {
   control1: number;
   control2?: string;
-  subdemo: SubDemo;
+  subDemo: SubDemo;
   subDemoList: SubDemo[];
   numberList: number[];
 }
@@ -29,8 +30,8 @@ export class AppComponent {
   form = new FormGroup2<Demo>({
     control1: new NumberFormControl(null, Validators.required, { label: 'Label', placeholder: 'Placeholder' }),
     control2: new TextFormControl(null, Validators.required, { label: 'Label 2', placeholder: 'Placeholder 2' }),
-    subdemo: new FormGroup2<SubDemo>({
-      control3: new TextFormControl(),
+    subDemo: new FormGroup2<SubDemo>({
+      control3: new ConventionalTextFormControl('value'),
       control4: new NumberFormControl()
     }),
     subDemoList: new FormArray2<SubDemo>([
@@ -47,23 +48,11 @@ export class AppComponent {
   model = 'some value';
   modelOptions: TextFormControlOptions & NgModel2Options = {
     controlType: TextFormControl,
-    label: 'Label 2',
-    placeholder: 'Placeholder 2'
+    label: 'Label 3',
+    placeholder: 'Placeholder 3'
   };
 
-  get control1(): NumberFormControl {
-    return this.form.get<NumberFormControl>('control1');
-  }
-
-  get subdemoControl(): FormGroup2<SubDemo> {
-    return this.form.get<FormGroup2>('subdemo');
-  }
-
-  get subdemoControl3(): TextFormControl {
-    return this.form.get<TextFormControl>(['subdemo', 'control3']);
-  }
-
-  get subDemoControl4Value(): number {
-    return this.subdemoControl.get<NumberFormControl>('control3').value;
+  get control3(): TextFormControl {
+    return this.form.get<FormGroup2<SubDemo>>('subDemo').get('control3');
   }
 }

@@ -2,8 +2,8 @@ import { AbstractControlOptions, FormControl, ValidatorFn } from '@angular/forms
 import { FormControl2Options } from './form-control2-options';
 import {AbstractControl2, IAbstractControl2} from './abstract-control2';
 
-export class FormControl2<TValue = unknown, TOptions extends FormControl2Options = FormControl2Options>
-  extends FormControl implements IAbstractControl2 {
+export class FormControl2<TValue = any, TOptions extends FormControl2Options = FormControl2Options>
+  extends FormControl implements IAbstractControl2<TValue> {
 
   readonly value: TValue;
 
@@ -29,7 +29,7 @@ export class FormControl2<TValue = unknown, TOptions extends FormControl2Options
     super.reset(value, options);
   }
 
-  get<TControl extends AbstractControl2>(path: Array<string | number> | keyof TValue & string): TControl | null {
+  get<TControl extends AbstractControl2>(path: Array<string | number> | string | keyof TValue): TControl | null {
     return super.get(path as Array<string | number> | string) as TControl;
   }
 }

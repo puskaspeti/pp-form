@@ -1,0 +1,6 @@
+<div>
+  <label>
+    {{ options?.label || '' }}
+    <input type="text" [(ngModel)]="value" (input)="onChange(value)" [placeholder]="options?.placeholder">
+  </label>
+</div>
