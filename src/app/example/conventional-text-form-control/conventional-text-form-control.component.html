@@ -1,6 +1,6 @@
 <div>
   <label>
     {{ options?.label || '' }}
-    <input type="text" [(ngModel)]="value" (input)="onChange(value)" [placeholder]="options?.placeholder">
+    <input type="text" [value]="value" (input)="handleInput($event)" (blur)="onTouched()" [placeholder]="options?.placeholder">
   </label>
 </div>

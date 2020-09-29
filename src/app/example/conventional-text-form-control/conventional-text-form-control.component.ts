@@ -26,4 +26,9 @@ export class ConventionalTextFormControlComponent
       this.value = value;
     }
   }
+
+  handleInput($event: Event) {
+    this.value = ($event.target as any).value;
+    this.onChange(this.value);
+  }
 }
