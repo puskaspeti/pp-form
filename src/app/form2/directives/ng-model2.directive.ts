@@ -8,7 +8,7 @@ import {
   OnDestroy,
   Optional,
   Self,
-  SimpleChanges,
+  SimpleChanges, Type,
 } from '@angular/core';
 import {
   AsyncValidator,
@@ -27,7 +27,6 @@ import {FormControl2} from '../models/form-control2';
 import {FormControl2Options} from '../models/form-control2-options';
 import {setNgControlToControlValueAccessor} from './shared';
 import {Subscription} from 'rxjs';
-import {NgModel2Options} from '../models/ng-model2-options';
 
 export const formControlBinding: any = {
   provide: NgControl,
@@ -47,8 +46,7 @@ export class NgModel2Directive<
 
   control = new FormControl2<TValue, TOptions>();
 
-  // tslint:disable-next-line: no-input-rename
-  @Input('options') set controlOptions(val: TOptions & NgModel2Options) {
+  @Input() set controlType(val: Type<FormControl2>) {
     this.setControlType(val);
   }
 
@@ -79,17 +77,17 @@ export class NgModel2Directive<
     });
   }
 
-  setControlType(option: TOptions & NgModel2Options) {
-    if (!option?.controlType) {
+  setControlType(controlType: Type<FormControl2>) {
+    if (!controlType) {
       return;
     }
 
-    if (option.controlType.prototype.isPrototypeOf(this.control)) {
+    if (controlType.prototype.isPrototypeOf(this.control)) {
       return;
     }
 
-    if ((new option.controlType) instanceof FormControl2) {
-      Object.setPrototypeOf(this.control, option.controlType.prototype);
+    if ((new controlType()) instanceof FormControl2) {
+      Object.setPrototypeOf(this.control, controlType.prototype);
     }
   }
 }

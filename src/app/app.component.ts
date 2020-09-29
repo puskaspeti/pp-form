@@ -2,7 +2,6 @@ import {Component} from '@angular/core';
 import { TextFormControl } from './example/text-form-control/text-form-control';
 import { TextFormControlOptions } from './example/text-form-control/text-form-control-options';
 import { Validators } from '@angular/forms';
-import {NgModel2Options} from './form2/models/ng-model2-options';
 import {FormGroup2} from './form2/models/form-group2';
 import {NumberFormControl} from './example/number-form-control/number-form-control';
 import {FormArray2} from './form2/models/form-array2';
@@ -46,8 +45,8 @@ export class AppComponent {
   });
 
   model = 'some value';
-  modelOptions: TextFormControlOptions & NgModel2Options = {
-    controlType: TextFormControl,
+  controlType = TextFormControl;
+  modelOptions: TextFormControlOptions = {
     label: 'Label 3',
     placeholder: 'Placeholder 3'
   };
