@@ -4,6 +4,6 @@ import { NgControl2 } from '../models/ng-control2';
 
 export function setNgControlToControlValueAccessor(ngControl: NgControl2, valueAccessor: ControlValueAccessor) {
   if (valueAccessor instanceof ControlValueAccessor2) {
-    valueAccessor.control = ngControl.control;
+    valueAccessor.ngControl = ngControl;
   }
 }

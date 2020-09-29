@@ -28,6 +28,7 @@ export class ConventionalTextFormControlComponent
   }
 
   handleInput($event: Event) {
+    this.value = ($event.target as any).value;
     this.onChange(this.value);
   }
 }

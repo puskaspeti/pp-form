@@ -40,11 +40,11 @@ export abstract class ControlValueAccessor2<
   onWriteValue = (value: TValue) => {};
 
   ngOnInit(): void {
-    if (this.control) {
-      return;
+    if (this.ngControl) {
+      this.control = this.ngControl.control;
+    } else {
+      this.setUpDefaultControl();
     }
-
-    this.setUpDefaultControl();
   }
 
   ngOnDestroy(): void {
