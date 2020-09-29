@@ -1,6 +1,6 @@
-import {FormGroup2} from './form-group2';
-import {FormControl2} from './form-control2';
-import {FormArray2} from './form-array2';
+import { FormArray2 } from './form-array2';
+import { FormControl2 } from './form-control2';
+import { FormGroup2 } from './form-group2';
 
 export type AbstractControl2<TValue = any> = FormGroup2<TValue> | FormControl2<TValue> | FormArray2;
 
@@ -17,5 +17,5 @@ export interface IAbstractControl2<TValue = any> {
   reset(value?: TValue | TValue[],
         options?: { onlySelf?: boolean; emitEvent?: boolean }): void;
 
-  get<TControl extends AbstractControl2>(path: Array<string | number> | string | keyof TValue): TControl | null;
+  get<TControl extends AbstractControl2 = any>(path: Array<string | number> | string): TControl | null;
 }

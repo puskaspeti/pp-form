@@ -1,8 +1,8 @@
-import {Component, forwardRef} from '@angular/core';
-import {ControlValueAccessor2} from '../../form2/models/control-value-accessor2';
-import {ConventionalTextFormControlOptions} from './conventional-text-form-control-options';
-import {ConventionalTextFormControl} from './conventional-text-form-control';
-import {NG_VALUE_ACCESSOR} from '@angular/forms';
+import { Component, forwardRef } from '@angular/core';
+import { NG_VALUE_ACCESSOR } from '@angular/forms';
+import { ControlValueAccessor2 } from '../../form2/models/control-value-accessor2';
+import { ConventionalTextFormControl } from './conventional-text-form-control';
+import { ConventionalTextFormControlOptions } from './conventional-text-form-control-options';
 
 export const ngValueAccessor: any = {
   provide: NG_VALUE_ACCESSOR,
@@ -28,7 +28,6 @@ export class ConventionalTextFormControlComponent
   }
 
   handleInput($event: Event) {
-    this.value = ($event.target as any).value;
     this.onChange(this.value);
   }
 }

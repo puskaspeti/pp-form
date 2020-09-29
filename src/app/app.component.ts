@@ -1,11 +1,11 @@
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
+import { Validators } from '@angular/forms';
+import { ConventionalTextFormControl } from './example/conventional-text-form-control/conventional-text-form-control';
+import { NumberFormControl } from './example/number-form-control/number-form-control';
 import { TextFormControl } from './example/text-form-control/text-form-control';
 import { TextFormControlOptions } from './example/text-form-control/text-form-control-options';
-import { Validators } from '@angular/forms';
-import {FormGroup2} from './form2/models/form-group2';
-import {NumberFormControl} from './example/number-form-control/number-form-control';
-import {FormArray2} from './form2/models/form-array2';
-import {ConventionalTextFormControl} from './example/conventional-text-form-control/conventional-text-form-control';
+import { FormArray2 } from './form2/models/form-array2';
+import { FormGroup2 } from './form2/models/form-group2';
 
 interface Demo {
   control1: number;
@@ -51,7 +51,15 @@ export class AppComponent {
     placeholder: 'Placeholder 3'
   };
 
+  get control1() {
+    return this.form.get<NumberFormControl>('control1');
+  }
+
+  get control2() {
+    return this.form.get<TextFormControl>('control2');
+  }
+
   get control3(): TextFormControl {
-    return this.form.get<FormGroup2<SubDemo>>('subDemo').get('control3');
+    return this.form.get('subDemo').get('control3');
   }
 }

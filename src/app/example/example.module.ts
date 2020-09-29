@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import {TextFormControlComponent} from './text-form-control/text-form-control.component';
-import {Form2Module} from '../form2/form2.module';
-import { NumberFormControlComponent } from './number-form-control/number-form-control.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ConventionalTextFormControlComponent } from './conventional-text-form-control/conventional-text-form-control.component';
+import { NumberFormControlComponent } from './number-form-control/number-form-control.component';
+import { TextFormControlComponent } from './text-form-control/text-form-control.component';
 
 
 @NgModule({
@@ -14,7 +14,8 @@ import { ConventionalTextFormControlComponent } from './conventional-text-form-c
   ],
   imports: [
     CommonModule,
-    Form2Module,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   exports: [
     TextFormControlComponent,
