@@ -8,13 +8,13 @@ export interface IAbstractControl2<TValue = any> {
 
   readonly value: TValue;
 
-  setValue(value: TValue | Required<TValue>,
+  setValue(value: Required<TValue>,
            options?: { onlySelf?: boolean; emitEvent?: boolean }): void;
 
-  patchValue(value: TValue | Partial<TValue>,
+  patchValue(value: Partial<TValue>,
              options?: { onlySelf?: boolean; emitEvent?: boolean }): void;
 
-  reset(value?: TValue | Partial<TValue>,
+  reset(value?: Partial<TValue>,
         options?: { onlySelf?: boolean; emitEvent?: boolean }): void;
 
   get<TControl extends AbstractControl2 = any>(path: Array<string | number> | string): TControl | null;
