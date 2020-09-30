@@ -1,6 +1,7 @@
 import { AbstractControlOptions, FormControl, ValidatorFn } from '@angular/forms';
 import { AbstractControl2, IAbstractControl2 } from './abstract-control2';
 import { FormControl2Options } from './form-control2-options';
+import {PartialType, RequiredType} from './generic-types';
 
 export class FormControl2<TValue = any, TOptions extends FormControl2Options = FormControl2Options>
   extends FormControl implements IAbstractControl2<TValue> {
@@ -14,7 +15,7 @@ export class FormControl2<TValue = any, TOptions extends FormControl2Options = F
       super(formState, validatorOrOpts);
   }
 
-  setValue(value: TValue,
+  setValue(value: RequiredType<TValue>,
            options?: {
              onlySelf?: boolean;
              emitEvent?: boolean,
@@ -24,7 +25,7 @@ export class FormControl2<TValue = any, TOptions extends FormControl2Options = F
     super.setValue(value, options);
   }
 
-  patchValue(value: TValue,
+  patchValue(value: PartialType<TValue>,
              options?: {
                onlySelf?: boolean;
                emitEvent?: boolean,
@@ -34,7 +35,7 @@ export class FormControl2<TValue = any, TOptions extends FormControl2Options = F
     super.patchValue(value, options);
   }
 
-  reset(value?: TValue,
+  reset(value?: PartialType<TValue>,
         options?: { onlySelf?: boolean; emitEvent?: boolean }): void {
     super.reset(value, options);
   }

@@ -1,7 +1,8 @@
 import { AbstractControlOptions, AsyncValidatorFn, FormGroup, ValidatorFn } from '@angular/forms';
 import { AbstractControl2, IAbstractControl2 } from './abstract-control2';
+import {ArrayElementType, PartialType, RequiredType} from './generic-types';
 
-export type ArrayElement<ArrayType extends readonly unknown[]> = ArrayType[number];
+
 
 export class FormGroup2<TValue = any> extends FormGroup implements IAbstractControl2<TValue> {
 
@@ -11,7 +12,7 @@ export class FormGroup2<TValue = any> extends FormGroup implements IAbstractCont
   constructor(
     controls: {
       [P in keyof Required<TValue>]: TValue[P] extends readonly unknown[]
-        ? AbstractControl2<ArrayElement<TValue[P]>>
+        ? AbstractControl2<ArrayElementType<TValue[P]>>
         : AbstractControl2<TValue[P]>
     },
     validatorOrOpts?: ValidatorFn | ValidatorFn[] | AbstractControlOptions | null,
@@ -20,17 +21,17 @@ export class FormGroup2<TValue = any> extends FormGroup implements IAbstractCont
     super(controls, validatorOrOpts, asyncValidator);
   }
 
-  setValue(value: TValue,
+  setValue(value: RequiredType<TValue>,
            options?: { onlySelf?: boolean; emitEvent?: boolean }): void {
     super.setValue(value, options);
   }
 
-  patchValue(value: TValue,
+  patchValue(value: PartialType<TValue>,
              options?: { onlySelf?: boolean; emitEvent?: boolean }): void {
     super.patchValue(value, options);
   }
 
-  reset(value?: TValue,
+  reset(value?: PartialType<TValue>,
         options?: { onlySelf?: boolean; emitEvent?: boolean }): void {
     super.reset(value, options);
   }

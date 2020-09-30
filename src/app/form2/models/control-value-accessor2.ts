@@ -3,6 +3,7 @@ import {AbstractControl, ControlValueAccessor, FormControl} from '@angular/forms
 import { FormControl2 } from './form-control2';
 import { FormControl2Options } from './form-control2-options';
 import { NgControl2 } from './ng-control2';
+import {PartialType, RequiredType} from './generic-types';
 
 @Directive()
 export abstract class ControlValueAccessor2<
@@ -49,19 +50,19 @@ export abstract class ControlValueAccessor2<
   // tslint:disable-next-line:variable-name
   protected _options: TOptions;
 
-  onChange = (value: TValue) => {};
+  onChange = (value: PartialType<TValue>) => {};
   onTouched = () => {};
-  onWriteValue = (value: TValue) => {};
+  onWriteValue = (value: PartialType<TValue>) => {};
 
   setUpDefaultControl(): void {
     this.control = new FormControl();
-    this.onWriteValue = (value) => { this.control.setValue(value, { emitViewToModelChange: false }); };
+    this.onWriteValue = (value) => { this.control.patchValue(value, { emitViewToModelChange: false }); };
     this.control.valueChanges.subscribe((value) => {
       this.onChange(value);
     });
   }
 
-  registerOnChange(fn: (value: TValue) => void): void {
+  registerOnChange(fn: (value: PartialType<TValue>) => void): void {
     this.onChange = fn;
   }
 
@@ -73,7 +74,7 @@ export abstract class ControlValueAccessor2<
     this.disabled = isDisabled;
   }
 
-  writeValue(value: TValue): void {
+  writeValue(value: PartialType<TValue>): void {
     if (this.disabled) {
       return;
     }
