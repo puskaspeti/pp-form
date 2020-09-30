@@ -3,9 +3,9 @@
 <section>
   <h2>Reactive form examples</h2>
   <form [formGroup]="form">
-    <app-text-form-control [formControl]="control1" [options]="control1.options"></app-text-form-control>
-    <app-text-form-control [formControl]="control2" [options]="control2.options"></app-text-form-control>
-    <app-conventional-text-form-control [formControl]="control3" [options]="modelOptions"></app-conventional-text-form-control>
+    <app-text-form-control [formControl]="control1"></app-text-form-control>
+    <app-text-form-control [formControl]="control2"></app-text-form-control>
+    <app-conventional-text-form-control [formControl]="control3"></app-conventional-text-form-control>
     <div>Form valid: {{ form.valid }}</div>
     <div>{{ form.value | json }}</div>
   </form>
@@ -15,4 +15,6 @@
   <h2>NgModel example</h2>
   <app-text-form-control [(ngModel)]="model" [options]="modelOptions"></app-text-form-control>
   {{ model }}
+  <app-text-form-control [(ngModel)]="model2" [options]="modelOptions" [controlType]="controlType"></app-text-form-control>
+  {{ model2 }}
 </section>

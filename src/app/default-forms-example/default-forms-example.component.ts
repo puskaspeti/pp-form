@@ -11,10 +11,9 @@ import {demoForm} from '../demo-models';
 })
 export class DefaultFormsExampleComponent {
 
-  form = demoForm;
+  form = demoForm();
 
   model = 'some value';
-  controlType = TextFormControl;
   modelOptions: TextFormControlOptions = {
     label: 'Label 3',
     placeholder: 'Placeholder 3'

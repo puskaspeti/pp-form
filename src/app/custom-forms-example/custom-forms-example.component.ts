@@ -11,9 +11,10 @@ import {NumberFormControl} from '../example/number-form-control/number-form-cont
 })
 export class CustomFormsExampleComponent {
 
-  form = demoForm;
+  form = demoForm();
 
   model = 'some value';
+  model2 = null;
   controlType = TextFormControl;
   modelOptions: TextFormControlOptions = {
     label: 'Label 3',
