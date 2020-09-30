@@ -1,7 +1,7 @@
 import { AbstractControlOptions, AsyncValidatorFn, FormArray, ValidatorFn } from '@angular/forms';
 import { AbstractControl2, IAbstractControl2 } from './abstract-control2';
 
-export class FormArray2<TValue = any> extends FormArray implements IAbstractControl2 {
+export class FormArray2<TValue = any> extends FormArray implements IAbstractControl2<TValue> {
 
   readonly value: TValue[];
 
