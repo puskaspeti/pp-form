@@ -6,15 +6,15 @@ export type AbstractControl2<TValue = any> = FormGroup2<TValue> | FormControl2<T
 
 export interface IAbstractControl2<TValue = any> {
 
-  readonly value: TValue | TValue[];
+  readonly value: TValue;
 
-  setValue(value: TValue | TValue[],
+  setValue(value: TValue | Required<TValue>,
            options?: { onlySelf?: boolean; emitEvent?: boolean }): void;
 
-  patchValue(value: TValue | TValue[],
+  patchValue(value: TValue | Partial<TValue>,
              options?: { onlySelf?: boolean; emitEvent?: boolean }): void;
 
-  reset(value?: TValue | TValue[],
+  reset(value?: TValue | Partial<TValue>,
         options?: { onlySelf?: boolean; emitEvent?: boolean }): void;
 
   get<TControl extends AbstractControl2 = any>(path: Array<string | number> | string): TControl | null;
