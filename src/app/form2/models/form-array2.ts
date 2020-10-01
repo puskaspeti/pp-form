@@ -1,30 +1,30 @@
-import { AbstractControlOptions, AsyncValidatorFn, FormArray, ValidatorFn } from '@angular/forms';
+import { AbstractControlOptions, AsyncValidatorFn, FormArray, ValidatorFn} from '@angular/forms';
 import { AbstractControl2, IAbstractControl2 } from './abstract-control2';
-import {PartialType, RequiredType} from './generic-types';
+import {BaseType, PartialType, RequiredType} from './generic-types';
 
-export class FormArray2<TValue = any> extends FormArray implements IAbstractControl2<TValue> {
-
-  readonly value: TValue[];
+export class FormArray2<TValue extends any[] = any[]> extends FormArray implements IAbstractControl2<BaseType<TValue>> {
+  readonly controls: AbstractControl2<BaseType<TValue>>[];
+  readonly value: TValue;
 
   constructor(
-    controls: AbstractControl2<TValue>[],
+    controls: AbstractControl2<BaseType<TValue>>[],
     validatorOrOpts?: ValidatorFn | ValidatorFn[] | AbstractControlOptions | null,
     asyncValidator?: AsyncValidatorFn | AsyncValidatorFn[] | null
   ) {
     super(controls, validatorOrOpts, asyncValidator);
   }
 
-  setValue(value: RequiredType<TValue>[],
+  setValue(value: RequiredType<BaseType<TValue>>[],
            options?: { onlySelf?: boolean; emitEvent?: boolean }): void {
     super.setValue(value, options);
   }
 
-  patchValue(value: PartialType<TValue>[],
+  patchValue(value: PartialType<BaseType<TValue>>[],
              options?: { onlySelf?: boolean; emitEvent?: boolean }): void {
     super.patchValue(value, options);
   }
 
-  reset(value?: PartialType<TValue>[],
+  reset(value?: PartialType<BaseType<TValue>>[],
         options?: { onlySelf?: boolean; emitEvent?: boolean }): void {
     super.reset(value, options);
   }

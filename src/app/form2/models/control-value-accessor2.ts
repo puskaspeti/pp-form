@@ -1,16 +1,15 @@
-import { Directive, Input, Type } from '@angular/core';
+import { Directive, Input } from '@angular/core';
 import {AbstractControl, ControlValueAccessor, FormControl} from '@angular/forms';
 import { FormControl2 } from './form-control2';
 import { FormControl2Options } from './form-control2-options';
 import { NgControl2 } from './ng-control2';
-import {PartialType, RequiredType} from './generic-types';
+import {PartialType} from './generic-types';
 
 @Directive()
 export abstract class ControlValueAccessor2<
   TValue = unknown,
   TOptions extends FormControl2Options = FormControl2Options,
-  TControl extends FormControl2<TValue, TOptions> = FormControl2<TValue, TOptions>,
-  TAlma extends new() => TAlma = null
+  TControl extends FormControl2<TValue, TOptions> = FormControl2<TValue, TOptions>
 > implements ControlValueAccessor {
 
   @Input() set options(val: TOptions) {

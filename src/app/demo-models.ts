@@ -27,14 +27,14 @@ export function demoForm() {
       control3: new ConventionalTextFormControl('value'),
       control4: new NumberFormControl()
     }),
-    subDemoList: new FormArray2<SubDemo>([
+    subDemoList: new FormArray2<SubDemo[]>([
       new FormGroup2<SubDemo>({
         control3: new TextFormControl(),
         control4: new NumberFormControl()
       })
     ]),
-    numberList: new FormArray2<number>([
-      new NumberFormControl(1),
+    numberList: new FormArray2<number[]>([
+      new NumberFormControl(1)
     ])
   });
 }
